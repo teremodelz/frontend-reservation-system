@@ -1,11 +1,16 @@
 export interface JwtPayload {
     sub: string
     roles: string[]
+    name: string
+    surname: string
+    exp : number
 }
 
 export interface User {
     login: string
     roles: string[]
+    name: string
+    surname: string
 }
 
 export function saveToken(token: string): void {
@@ -27,9 +32,18 @@ export function getUser(): User | null {
     return {
         login: payload.sub,
         roles: payload.roles,
+        name : payload.name,
+        surname : payload.surname
     }
 }
 
 export function isLoggedIn(): boolean {
-    return !!getToken()
+    const token = getToken()
+    if (!token) return false
+    try {
+        const payload = JSON.parse(atob(token.split('.')[1])) as JwtPayload
+        return payload.exp * 1000 > Date.now()
+    } catch {
+        return false
+    }
 }

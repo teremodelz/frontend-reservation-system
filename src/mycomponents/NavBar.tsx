@@ -9,10 +9,12 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+import { isLoggedIn, getUser, removeItem } from "@/api/tokenService"
 
 
 export function NavigationBarFull() {
   const navigate = useNavigate()
+  const logged = isLoggedIn()
   return (
     <nav className="w-full bg-zinc-900 px-6 py-3 flex items-center justify-between">
 
@@ -71,34 +73,8 @@ export function NavigationBarFull() {
         </NavigationMenu>
       </div>
 
-      
-      <div className="flex items-center gap-2">
-        <NavigationMenu>
-          <NavigationMenuList>
+        {logged ? <Authorized /> : <NotAuthorized />}
 
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} text-white hover:bg-zinc-700 bg-transparent`}
-                onClick={() => navigate('/login')}
-                style={{ cursor: 'pointer' }}
-              >
-                Zaloguj się
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} text-white hover:bg-zinc-700 bg-transparent`}
-                onClick={() => navigate('/register')}
-                style={{ cursor: 'pointer' }}
-              >
-                Zarejestruj się
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-
-          </NavigationMenuList>
-        </NavigationMenu>
-      </div>
 
     </nav>
   )
@@ -158,6 +134,7 @@ function NotAuthorized(){
 
 function Authorized(){
   const navigate = useNavigate()
+  const user = getUser()
   return <div className="flex items-center gap-2">
         <NavigationMenu>
           <NavigationMenuList>
@@ -167,17 +144,19 @@ function Authorized(){
                 className={`${navigationMenuTriggerStyle()} text-white hover:bg-zinc-900 bg-transparent`}
                 style={{ cursor: 'pointer' }}
               >
-                Witaj, {}
+                Witaj, {user?.name}
               </NavigationMenuLink>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
               <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} text-white hover:bg-zinc-700 bg-transparent`}
-                onClick={() => navigate('/register')}
+                className={`${navigationMenuTriggerStyle()} text-white hover:hover:bg-red-500 bg-transparent`}
+                onClick={() => {
+                  removeItem()
+                  navigate('/logout')}}
                 style={{ cursor: 'pointer' }}
               >
-                Zarejestruj się
+                Wyloguj się
               </NavigationMenuLink>
             </NavigationMenuItem>
 

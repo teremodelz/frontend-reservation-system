@@ -5,6 +5,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import { TutorListPage } from './pages/TutorListPage'
 import { isLoggedIn } from './api/tokenService'
 import { TutorProfilPage } from './pages/TutorProfilPage'
+import LogOutPage from './pages/LogOutPage'
 function App() {
     return (
         <BrowserRouter>
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/test" element={<NotFoundPage />} />
                 <Route path="/tutors" element={<TutorListPage />} />
                 <Route path="/tutors/:id" element={<TutorProfilPage />} />
+                <Route path="/logout" element={<LogOutPage />} />
                 <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </BrowserRouter>
