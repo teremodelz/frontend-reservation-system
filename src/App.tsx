@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
+import NotFoundPage from './pages/NotFoundPage'
+import { TutorListPage } from './pages/TutorListPage'
 import { isLoggedIn } from './api/tokenService'
-
+import { TutorProfilPage } from './pages/TutorProfilPage'
 function App() {
     return (
         <BrowserRouter>
@@ -17,6 +19,9 @@ function App() {
                             : <Navigate to="/login" />
                     }
                 />
+                <Route path="/test" element={<NotFoundPage />} />
+                <Route path="/tutors" element={<TutorListPage />} />
+                <Route path="/tutors/:id" element={<TutorProfilPage />} />
                 <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </BrowserRouter>

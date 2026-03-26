@@ -1,6 +1,17 @@
-import { useState, ChangeEvent, FormEvent } from 'react'
+import { useState } from 'react'
+import type { ChangeEvent, FormEvent } from 'react'
 import { login } from '../api/authapi'
 import { saveToken } from '../api/tokenService'
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 interface LoginForm {
     username: string
@@ -35,34 +46,65 @@ function LoginPage() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h1>Login testowy</h1>
+        <div className="min-h-screen flex items-center justify-center bg-[oklch(21%_0.006_285.885)]">
+            <Card className="w-full max-w-sm">
+                <CardHeader>
+                    <CardTitle>TutoringWebAppProject</CardTitle>
+                    <CardTitle>Zaloguj się do swojego konta</CardTitle>
+                    <CardDescription>
+                        Wprowadź login i hasło do swojego konta.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={handleSubmit}>
+                        <div className="flex flex-col gap-6">
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+                            {error && <p className="text-red-500 text-sm">{error}</p>}
 
-            <input
-                name="username"
-                type="text"
-                placeholder="Login"
-                value={form.username}
-                onChange={handleChange}
-                required
-            />
-            <input
-                name="password"
-                type="password"
-                placeholder="Haslo"
-                value={form.password}
-                onChange={handleChange}
-                required
-            />
+                            <div className="grid gap-2">
+                                <Label htmlFor="username">Login</Label>
+                                <Input
+                                    id="username"
+                                    name="username"
+                                    type="text"
+                                    placeholder="kosior1234"
+                                    value={form.username}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="password">Hasło</Label>
+                                <Input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    placeholder="••••••••"
+                                    value={form.password}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <Button type="submit" className="w-full" disabled={loading}>
+                                {loading ? 'Logowanie...' : 'Zaloguj się'}
+                            </Button>
 
-            <button type="submit" disabled={loading}>
-                {loading ? 'Loguje...' : 'Zaloguj się'}
-            </button>
-
-            <a href="/register">Nie masz konta? Zarejestruj się</a>
-        </form>
+                            <p className="text-center text-sm">
+                                Nie masz konta?{' '}
+                                <a href="/register" className="underline underline-offset-4 hover:text-primary">
+                                    Zarejestruj się
+                                </a>
+                            </p>
+                             <p className="text-center text-sm">
+                                 <a href="/test" className="underline underline-offset-4 hover:text-primary">
+                                    Powrót do strony glównej.
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
+        </div>
     )
 }
 
