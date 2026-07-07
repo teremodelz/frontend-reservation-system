@@ -22,7 +22,7 @@ function NotFoundPage() {
       </EmptyHeader>
       <EmptyContent>
         <EmptyDescription>
-          <a href="/login">Powrót do strony glównej.</a>
+          <a href="/">Powrót do strony glównej.</a>
         </EmptyDescription>
       </EmptyContent>
     </Empty>

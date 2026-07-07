@@ -24,7 +24,10 @@ async function request<T = unknown>(method: HttpMethod, url: string, body?: unkn
         throw new Error(err.message ?? `HTTP ${res.status}`)
     }
 
-    return res.status === 204 ? null : (res.json() as Promise<T>)
+    if (res.status === 204) return null
+    const contentType = res.headers.get('content-type') ?? ''
+    if (contentType.includes('application/json')) return res.json() as Promise<T>
+    return res.text() as unknown as Promise<T>
 }
 
 export const client = {

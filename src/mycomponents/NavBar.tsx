@@ -47,13 +47,13 @@ export function NavigationBarFull() {
               <NavigationMenuContent>
                 <ul className="w-96">
                   <ListItem onClick={() => navigate('/about')} title="O nas">
-                    Tu będzie href i strona przekierowująca do wprowadzenia
+                    Poznajmy się bliżej - dowiedz się z kim masz do czynienia. :)
                   </ListItem>
                   <ListItem onClick={() => navigate('/subjects')} title="Przedmioty">
-                    Krótka podstrona o przedmiotach które są na stronie + przekierowanie.
+                    Wybierz interesujący Cię przedmiot i znajdź korepetytora, który Ci pomoże.
                   </ListItem>
                   <ListItem onClick={() => navigate('/become-tutor')} title="Zostań korepetytorem">
-                    Podoba sytuacja zostań korepetytorem ectera…
+                    Złóż zgłoszenie i dołącz do grona naszych korepetytorów.
                   </ListItem>
                 </ul>
               </NavigationMenuContent>
@@ -135,9 +135,44 @@ function NotAuthorized(){
 function Authorized(){
   const navigate = useNavigate()
   const user = getUser()
+  const isAdmin = user?.roles.includes('ROLE_ADMIN') ?? false
   return <div className="flex items-center gap-2">
         <NavigationMenu>
           <NavigationMenuList>
+
+            {isAdmin && (
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={`${navigationMenuTriggerStyle()} text-yellow-400 hover:bg-zinc-700 bg-transparent`}
+                  onClick={() => navigate('/admin')}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Admin
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            )}
+
+            {!isAdmin && (
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  className={`${navigationMenuTriggerStyle()} text-white hover:bg-zinc-700 bg-transparent`}
+                  onClick={() => navigate('/dashboard')}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Mój panel
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            )}
+
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                className={`${navigationMenuTriggerStyle()} text-white hover:bg-zinc-700 bg-transparent`}
+                onClick={() => navigate('/profile')}
+                style={{ cursor: 'pointer' }}
+              >
+                Mój profil
+              </NavigationMenuLink>
+            </NavigationMenuItem>
 
             <NavigationMenuItem>
               <NavigationMenuLink
@@ -150,7 +185,7 @@ function Authorized(){
 
             <NavigationMenuItem>
               <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} text-white hover:hover:bg-red-500 bg-transparent`}
+                className={`${navigationMenuTriggerStyle()} text-white hover:bg-red-500 bg-transparent`}
                 onClick={() => {
                   removeItem()
                   navigate('/logout')}}

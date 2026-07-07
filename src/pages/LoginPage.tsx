@@ -96,7 +96,7 @@ function LoginPage() {
                                 </a>
                             </p>
                              <p className="text-center text-sm">
-                                 <a href="/test" className="underline underline-offset-4 hover:text-primary">
+                                 <a href="/" className="underline underline-offset-4 hover:text-primary">
                                     Powrót do strony glównej.
                                 </a>
                             </p>

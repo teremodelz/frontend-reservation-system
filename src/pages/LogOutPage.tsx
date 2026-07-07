@@ -44,7 +44,7 @@ function LogOutPage() {
       </EmptyHeader>
       <EmptyContent>
         <EmptyDescription>
-          <a href="/login">Kliknij tutaj, żeby manualnie wrócić do strony glównej.</a>
+          <a href="/">Kliknij tutaj, żeby manualnie wrócić do strony glównej.</a>
         </EmptyDescription>
       </EmptyContent>
     </Empty>

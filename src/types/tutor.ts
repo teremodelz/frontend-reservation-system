@@ -8,6 +8,7 @@ export type DayOfWeek =
   }
 
   export interface AvailabilityDTO{
+    id: number
     dayOfWeek : DayOfWeek
     startTime : string
     endTime : string

@@ -5,6 +5,7 @@ export type StudentLevel = 'BEGINNER' |'PREINTERMEDIATE' |'INTERMEDIATE' | 'UPPE
 
 
 export interface GetLessonDTO {
+    lessonId : number
     tutorName : string
     tutorSurname : string
     studentName : string
